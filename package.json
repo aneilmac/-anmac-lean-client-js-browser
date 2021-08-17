@@ -1,7 +1,8 @@
 {
-  "name": "@anmac/lean-client-js-browser",
+  "name": "@aneilmac/lean-client-js-browser",
   "version": "2.0.4",
   "description": "",
+  "private": false,
   "module": "lib/leanBrowser.bundle.js",
   "types": "types/index.d.ts",
   "unpkg": "lib/leanBrowser.bundle.js",
