@@ -42,3 +42,5 @@ onmessage = (e: MessageEvent<any>) => {
             }
     }
 };
+
+export default null as any;

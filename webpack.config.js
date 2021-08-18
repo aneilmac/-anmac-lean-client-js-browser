@@ -10,10 +10,21 @@ module.exports = [{
   module: {
     rules: [
       {
+        test: /webworkerscript\.ts$/,
+        use: [ 
+          {
+            loader: 'worker-loader', 
+            options: { 
+              inline: 'no-fallback' 
+            },
+          }
+        ],
+      },
+      {
         test: /\.tsx?$/,
         use: [ {loader: 'babel-loader'}, {loader: 'ts-loader' } ],
         exclude: /node_modules/,
-      },
+      }
     ]
   },
   resolve: {

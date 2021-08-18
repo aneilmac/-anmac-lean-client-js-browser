@@ -1,6 +1,7 @@
 import {Connection, Event, Transport, TransportError} from 'lean-client-js-core';
 import {LeanJsOpts} from './inprocesstypes';
 import {Res, StartWorkerReq} from './webworkertypes';
+import Worker from './webworkerscript';
 
 export class WebWorkerTransport implements Transport {
     opts: LeanJsOpts;
@@ -10,18 +11,13 @@ export class WebWorkerTransport implements Transport {
     }
 
     connect(): WebWorkerConnection {
-        const worker = new Worker(
-            new URL('./webworkerscript.ts', import.meta.url), 
-            { type: 'module',
-              credentials: 'same-origin'
-            }
-        );
+        const worker = new Worker();
         worker.postMessage({
             command: 'start-webworker',
             opts: this.opts,
         } as StartWorkerReq);
         const conn = new WebWorkerConnection(worker);
-        worker.onmessage = (e) => {
+        worker.onmessage = (e: any) => {
             const res = e.data as Res;
             // Pass all messages (including errors) back to the server object
             // jsonMessage has some error handling already
